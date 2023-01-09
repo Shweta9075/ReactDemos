@@ -1,0 +1,45 @@
+.text{
+    width: 60%;
+}
+.label1,.label2,.label3,.label4,.label5,.label6,.label7{
+    width: 110px;
+    display: inline-block;
+}
+.form{
+    width: 600px;
+    display: flex;
+    display: inline-block;
+   flex-direction: column;
+   margin-left: 400px;
+   margin-top: 100px;
+   border-style: solid;
+   border-color: darkgrey;
+   padding-left: 100px;
+   padding-right: 10px;
+   padding-bottom: 50px;
+   padding-top: 50px;
+   
+}
+.submit{
+    margin-right: 15px;
+    margin-left: 90px;
+}
+.salary{
+    width: 15%;
+}
+.notes{
+    width: 60%;
+}
+.div{
+   margin-bottom: 0.5cm;
+}
+.img1,.img2,.img3,.img4{
+    height: 5%;
+    width: 5%;
+}
+.requ1,.requ2{
+    color: red;
+}
+@media screen and (max-width: 800px) {
+    
+  }
