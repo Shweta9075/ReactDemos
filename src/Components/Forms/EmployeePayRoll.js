@@ -21,14 +21,17 @@ const EmployeePayRole = () => {
     name : name,
     gender: gender,
     salary:salary,
-    department:department
+    department:department,
+    startDate: `${day} ${month} ${year}`,
+    notes:notes
   }
   
   function handleSubmit(e){
     e.preventDefault(e)
     console.log("submited");
+    console.log(Employee);
     axios.post("http://localhost:8080/Employee/RegisterEmployee",Employee)
-    .then(response => console.log(response))
+    .then(response => alert(response.data.msg))
     .catch(error => console.log(error))
     if(name.length==0 || gender.length==0){
       setError(true)
@@ -44,7 +47,7 @@ const EmployeePayRole = () => {
     <label className='label1'>Name</label>
     <div>
     <input type="text" placeholder='Enter employee name....' className='text' name="name" onChange={(event) =>{
-      console.log(event.target.value)
+     console.log(event.target.value)
      setName(event.target.value)}}
      ></input>
     </div>
@@ -98,7 +101,9 @@ const EmployeePayRole = () => {
 
     <div>
     <label className='label5'>Salary</label>
-    <select name="Select salary" class="salary" onChange={(event) => setSalary(event.target.value)}>
+    <select name="salary" class="salary" onChange={(event) =>{ setSalary(event.target.value) 
+       console.log(event.target.value)}} >
+   
      <option>20K</option>
      <option>35K</option>
      <option>40K</option>
@@ -111,8 +116,8 @@ const EmployeePayRole = () => {
     <br></br>
 
     <div>
-    <label className='label6'>StartDate</label>
-    <select name="day" onChange={() => setDay(day)}>
+    <label className='label6'>startDate</label>
+    <select name="day" onChange={(event) => setDay(event.target.value)}>
      <option value="day">Day</option>
      <option value="1">1</option>
      <option value="2">2</option>
@@ -147,7 +152,7 @@ const EmployeePayRole = () => {
      <option value="31">31</option>
     </select> &nbsp; &#160;
 
-    <select name="month" onChange={() => setMonth(month)}>
+    <select name="month" onChange={(event) => setMonth(event.target.value)}>
      <option value="month">Month</option>
      <option value="january">January</option>
      <option value="feburary">Feburary</option>
@@ -163,7 +168,7 @@ const EmployeePayRole = () => {
      <option value="december">December</option>
     </select> &nbsp; &#160;
 
-    <select name="year" onChange={() => setYear(year)}>
+    <select name="year" onChange={(event) => setYear(event.target.value)}>
      <option value="year">Year</option>
      <option value="2015">2015</option>
      <option value="2016">2016</option>
@@ -180,8 +185,8 @@ const EmployeePayRole = () => {
     <br></br>
 
     <div>
-     <label className='label7' onChange={() => setNotes(notes)}>Notes</label>
-     <textarea name="" rows="4" placeholder='Write something here.....' class="notes"></textarea>
+     <label className='label7' >Notes</label>
+     <textarea name="" rows="4" placeholder='Write something here.....' class="notes"  onChange={(event) => {setNotes(event.target.value)}}></textarea>
     </div>
     <br></br>
 

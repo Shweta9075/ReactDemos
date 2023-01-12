@@ -1,98 +1,131 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import search from '../../Assets/search.png'
+import EmployeePayRole from './EmployeePayRoll';
+import {DeleteOutlined} from '@ant-design/icons/lib/icons'
+import { EditOutlined } from '@ant-design/icons/lib/icons';
+import { HomeOutlined } from '@ant-design/icons/lib/icons';
+import { LeftOutlined } from '@ant-design/icons/lib/icons';
+import { RightOutlined } from '@ant-design/icons/lib/icons';
+import { UserOutlined } from '@ant-design/icons/lib/icons';
+import { Link } from 'react-router-dom'
+import img6 from "../../Assets/img6.png"
 
-const Table = () => {
+
+
+function Table () {
+  const[employees, setEmployees] = useState([]);
+  const[value, setValue]= [0]
+  
+
+useEffect(()=>{
+  axios.get("http://localhost:8080/Employee/Show all employees")
+  .then(Response=>{
+    console.log(Response.data.obj);
+    const employees = Response.data.obj
+  setEmployees(employees)
+  console.log(employees)})
+  .catch(error=>console.log(error));
+  
+},[])
+
+function deleteEmployees(name) {
+  console.log(name);
+  axios.delete(`http://localhost:8080/Employee/Delete-Employee?name=${name}`)
+  .then(responce => alert(responce.data.msg))
+  .catch(error => console.log(error))
+
+}
+
+function updateEmployees() {
+  let name = parseInt(name)
+  axios.put(`http://localhost:8080/Employee/Update-Employee?name=${name}`)
+  .then(responce => alert(responce.data.msg))
+  .catch(error => console.log(error))
+}
+
+function searchEmployee() {
+  var input, filter, found, table, tr, td, i, j;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tableid");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td");
+      for (j = 0; j < td.length; j++) {
+          if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+              found = true;
+          }
+      }
+      if (found) {
+          tr[i].style.display = "";
+          found = false;
+      } else {
+          tr[i].style.display = "none";
+      }
+  }
+}
+
+  function callBackEndApi(value) {
+    console.log(value);
+    axios.get(`http://localhost:8080/Employee/Search-Employee-ByName?name=${value}`)
+    .then(responce => console.log(responce))
+    .catch(error => console.log(error));
+  }
+
   return (
     <div>
+    <div className='img6'>
+    <img src={img6} className="img6"></img> &nbsp; &#160;
+    </div>
     <div className='container'>
     <div className='heading'>
     <div className='title'>
-     <h1 className='h1'>Employee Details</h1>
+     <h2 className='h2'>Employee Details</h2>
     </div>
     <div className='search-box'>
-     <input type="text" className='searchText' placeholder='Type to search'></input>
-     <img src={search} className="search"></img>&nbsp; &#160;
-     <a href='#' className='searchbtn'></a>
-    <button type="button" className='button'>+ Add User</button>
+     <input type="text" id='myInput' onKeyUp={searchEmployee} placeholder="Search for names.." title="Type in a name"/>
+    <input type='text' onChange={(event) => callBackEndApi(event.target.value)}></input>&nbsp; &#160;&nbsp; &#160;
+    <Link to= "/EmployeePayRoll" className="button">+AddUser</Link>
+     </div>
     </div>
-    </div>
-    <table className='table'>
+    <table className='table' id="tableid">
     <thead className='thead'>
-    <div className='th'>
-       <th>Name</th>
-       <th>Gender</th>
-       <th>Department</th>
-       <th>Salary</th>
-       <th>StartDate</th>
-       <th>Action</th>
-       </div>
+       <th className='th1'>Name</th>
+       <th className='th2'>Gender</th>
+       <th className='th3'>Department</th>
+       <th className='th4'>Salary</th>
+       <th className='th5'>StartDate</th>
+       <th className='th6'>Action </th>
+       
     </thead>
-    <tbody className='tbody'>
-      <tr>
-      <div className='td'>
-        <td data-lable="name">Shweta Patil</td>
-        <td data-label="gender">Female</td>
-        <td data-lable="department">Engineer</td>
-        <td data-lable="Salary">30k</td>
-        <td data-lable="startDate">4-march-2021</td>
-        <td data-label="action"></td>
-        </div>
-      </tr>
-      <tr>
-      <div className='td'>
-        <td data-lable="name">Pooja Mane</td>
-        <td data-label="gender">Female</td>
-        <td data-lable="department">Hr</td>
-        <td data-lable="Salary">40k</td>
-        <td data-lable="startDate">8 June 2020</td>
-        <td data-label="action"></td>
-        </div>
-      </tr>
-      <tr>
-      <div className='td'>
-        <td data-lable="name">Kiran Birajdar</td>
-        <td data-label="gender">Male</td>
-        <td data-lable="department">Finance</td>
-        <td data-lable="Salary">40k</td>
-        <td data-lable="startDate">1 January 2019</td>
-        <td data-label="action"></td>
-        </div>
-      </tr>
-      <tr>
-      <div className='td'>
-        <td data-lable="name">Geeta Patil</td>
-        <td data-label="gender">Female</td>
-        <td data-lable="department">Hr</td>
-        <td data-lable="Salary">35k</td>
-        <td data-lable="startDate">2 Feb 2018</td>
-        <td data-label="action"></td>
-        </div>
-      </tr>
-      <tr>
-      <div className='td'>
-        <td data-lable="name">Deepak Patil</td>
-        <td data-label="gender">Male</td>
-        <td data-lable="department">Engineer</td>
-        <td data-lable="Salary">50k</td>
-        <td data-lable="startDate">7 August 2021</td>
-        <td data-label="action"></td>
-        </div>
-      </tr>
-      <tr>
-      <div className='td'>
-        <td data-lable="name">Abhijeet Birajdar</td>
-        <td data-label="gender">Male</td>
-        <td data-lable="department">Finance</td>
-        <td data-lable="Salary">35k</td>
-        <td data-lable="startDate">6 Dec 2022</td>
-        <td data-label="action"></td>
-        </div>
-      </tr>
-    </tbody>
+      <tbody className='tbody'>{
+        employees.map((emp)=>(
+          <tr>
+          <td className='td1'>{emp.name}</td>
+          <td className='td2'>{emp.gender}</td>
+          <td className='td3'>{emp.department}</td>
+          <td className='td4'>{emp.salary}</td>
+          <td className='td4'>{emp.startDate}</td>
+          <td className='td6'>{emp.action}
+           <DeleteOutlined  onClick={() => deleteEmployees(emp.name)} />&nbsp; &#160;
+           <EditOutlined  onClick={() =>updateEmployees(emp.name)} />
+          </td>
+          </tr>
+        ) )
+      }
+      </tbody>
     </table>
+    <div className='outline'>
+    <HomeOutlined />&nbsp; &#160;
+    <LeftOutlined />&nbsp; &#160;
+    <label>1 of 2</label>&nbsp; &#160;
+    <RightOutlined />
+    </div>
     </div>
     </div>
   )
-}
+    }
+
 
 export default Table

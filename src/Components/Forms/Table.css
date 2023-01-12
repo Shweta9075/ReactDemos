@@ -4,35 +4,27 @@
     width: 10%;
     border-radius: 20px;
 }
-.button{
-    width: 30%;
-    background-color: olivedrab;
-}
 .container{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     width: 70%;
     margin: 2rem auto;
-    border: 1px solid #000;
 }
 .heading{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.title{
+ .title{
     flex-basis: 50%;
     height: 100%;
     padding: 1rem 20px;
-}
-.h1{
+} 
+.h2{
     font-size: 2.5rem;
     font-weight: 900;
     color: darkslategrey;
     text-shadow: 1px 2px 1px #fff;
     font-family: sans-serif;
-}
+} 
 .search-box{
     flex-basis: 30%;
     height: 100%;
@@ -53,6 +45,16 @@
     box-shadow: 0 0 15px 1px #b6bbc0;
     border-radius: 50px;
 }
+.button{
+    width: 50%;
+    padding-top: 10px;
+    padding-left: 0.5cm;
+    padding-right: 0.5cm;
+    padding-bottom: 5px;
+    color: white;
+    font-size: medium;
+    background-color: yellowgreen;
+} 
 .table{
     width: 100%;
     border-collapse: collapse;
@@ -61,16 +63,42 @@
     width: 100%;
     text-align: center;
 }
-.th,.td{
-    padding: 1rem 20px;
-    border: 1px solid #bbb;
+.th1,.th2,.th3,.th4,.th5,.th6,.td1,.td2,.td3,.td4,.td5,.td6{
+    padding:  10px;
+    border: 0.5px solid #bbb;
 }
-.th{
+.td1,.td2,.td3,.td4,.td5,.td6{
+    padding-top: 7pxpx;
+    padding-bottom: 7pxpx;
+}
+.th1,.th2,.th3,.th4,.th5,.th6{
     font-size: 25px;
     font-weight: bold;
     background-color: slategrey;
     font-family: sans-serif;
+} 
+.edit,.delete{
+    background-color: #bbb;
 }
+.outline{
+    text-align: center;
+    padding-top: 0.5cm;
+    color: slategray;
+}
+#myInput {
+    background-image: url('https://www.w3schools.com/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+   /* width: 100%;*/
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 0px;
+    border-radius: 25px;
+  }
+  .img6{
+    
+  }
 @media(max-width: 500px){
     .container{
         width: 90%;
